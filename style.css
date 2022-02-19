@@ -1,0 +1,91 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: black;
+  color: white;
+  font-family: Roboto, Arial, sans-serif;
+}
+/* nav */
+nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: #222;
+  color: white;
+  width: 100%;
+  margin: 0px;
+  padding: 15px;
+}
+.fa-youtube {
+  color: red;
+}
+.you {
+  font-size: 20px;
+  margin-left: 5px;
+  font-weight: bold;
+}
+.left {
+  margin-left: 40px;
+  margin-top: 7px;
+}
+.left > i:nth-child(1) {
+  margin-right: 15px;
+}
+#searchTerm {
+  width: 360px;
+  padding: 7px;
+}
+.btn_search {
+  /* height: 34px; */
+  background-color: #777;
+  color: white;
+  padding: 7px;
+  width: 25px;
+  margin-top: 2px;
+  height: 19px;
+  text-align: center;
+}
+/* .fa-microphone {
+    font-size: 20px;
+  } */
+.right {
+  margin-right: 40px;
+  margin-top: 7px;
+}
+.right > i {
+  margin-right: 15px;
+  margin-left: 5px;
+}
+.fa-bell,
+.fa-table-cells,
+.fa-user,
+.fa-video,
+.fa-youtube,
+.fa-bars {
+  font-size: 1.5em;
+}
+
+/* searchResult  */
+#searchResult {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+#searchResult > div {
+  width: 320px;
+  height: auto;
+  margin: 10px 20px;
+}
+
+/* page 2 */
+#main {
+  display: flex;
+  /* flex-direction: column; */
+}
+#container {
+  flex: 7;
+}
+#suggeset {
+  flex: 3;
+}

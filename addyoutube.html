@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/321450d5a2.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>youtube</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="NAVBAR"></div>
+    <!-- <nav>
+      <div class="left">
+        <i class="fa-solid fa-bars fa-2x"></i>
+        <i class="fa-brands fa-youtube fa-2x"></i
+        ><span class="you">YouTube </span>
+      </div>
+      <div class="mid">
+        <input
+          type="text"
+          placeholder="Search Video"
+          id="searchTerm"
+          value="masai"
+        />
+        <i
+          class="btn_search fa-solid fa-magnifying-glass"
+          onclick="searchVideo()"
+        ></i>
+        <i class="fa-solid fa-microphone fa-xlg"></i>
+      </div>
+      <div class="right">
+        <i class="fa-solid fa-table-cells fa-2x"></i>
+        <i class="fa-solid fa-bell fa-2x"></i>
+        <i class="fa-solid fa-user fa-2x"></i>
+        <i class="fa-solid fa-video fa-2x"></i>
+      </div>
+    </nav> -->
+    <div id="searchResult"></div>
+  </body>
+</html>
+<script type="module">
+  import navbar from "./components/navbar.js";
+  let NAVBAR = document.getElementById("NAVBAR");
+  NAVBAR.innerHTML = navbar();
+  console.log(navbar);
+
+  let arr = [];
+  let key = "AIzaSyAKo2_8Ji4nOCiN1uTPBhgenXAbYm9XBQs";
+  let searchResult = document.getElementById("searchResult");
+  // searchVideo function her
+  let btn_search = document.getElementById("btn_search");
+  btn_search.addEventListener("click", searchVideo);
+  searchVideo();
+  async function searchVideo() {
+    try {
+      let userInput = document.getElementById("searchTerm").value;
+      let res = await fetch(
+        `https://www.googleapis.com/youtube/v3/search?regionCode=IN&part=snippet&key=${key}&q=${userInput}&type=video&maxResults=20`
+      );
+      let data = await res.json();
+      let videoList = data.items;
+      // console.log(videoList);
+      displayData(videoList);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  let displayData = (videoData) => {
+    searchResult.textContent = "";
+
+    console.log("videoData", videoData);
+    videoData.forEach((video) => {
+      console.log("hahd");
+      let {
+        id: { videoId },
+        snippet: {
+          title,
+          channelTitle,
+          thumbnails: {
+            medium: { url },
+          },
+        },
+      } = video;
+      console.log("video", videoId);
+      //   let {id:{}}=video
+      //   let = video;
+      let videoCard = document.createElement("div");
+      let iframe = document.createElement("iframe");
+      //   iframe.src = `https://www.youtube.com/embed/${videoId}`;
+      iframe.src = url;
+
+      iframe.width = "320px";
+      iframe.height = "180px";
+
+      iframe.setAttribute("allowfullscreen", true);
+      let div1 = document.createElement("div");
+      div1.textContent = `Channel Name - ${channelTitle}`;
+      let div2 = document.createElement("div2");
+      div2.textContent = title;
+      div2.style.fontSize = "20px";
+      div2.style.fontWeight = "bold";
+      videoCard.append(iframe, div2, div1);
+      searchResult.append(videoCard);
+      //
+
+      //
+      videoCard.addEventListener("click", function () {
+        arr = [];
+        arr.push(videoId, title, channelTitle);
+
+        localStorage.setItem("clickdata", JSON.stringify(arr));
+        window.location.href = "showvideo.html";
+      });
+    });
+  };
+</script>

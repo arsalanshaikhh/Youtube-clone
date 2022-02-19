@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/321450d5a2.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>showvideo</title>
+    <link rel="stylesheet" href="./style.css" />
+    <style>
+      body {
+        background-color: white;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="NAVBAR"></div>
+    <!-- navbar her -->
+    <div id="searchResult"></div>
+    <!-- main -->
+    <div id="main">
+      <div id="container"></div>
+      <div id="suggeset"></div>
+    </div>
+  </body>
+</html>
+<script type="module">
+  // NAVBAR IMPORT HERE
+  import navbar from "./components/navbar.js";
+  let NAVBAR = document.getElementById("NAVBAR");
+  NAVBAR.innerHTML = navbar();
+
+  // LocalStorage use here
+  let container = document.getElementById("container");
+  let clickdata = JSON.parse(localStorage.getItem("clickdata"));
+  //   console.log(clickdata);
+  let dataarr = clickdata[0];
+  let datatitle = clickdata[1];
+  let datachanel = clickdata[2];
+  console.log(dataarr);
+  let iframeDiv = document.createElement("div");
+  let iframevideo = document.createElement("iframe");
+  iframevideo.src = `https://www.youtube.com/embed/${dataarr}`;
+  console.log(iframevideo);
+  iframevideo.width = "100%";
+  iframevideo.height = "500px";
+  iframevideo.setAttribute("allowfullscreen", true);
+  //
+  let div1 = document.createElement("div");
+  div1.textContent = `Channel Name - ${datachanel}`;
+  let div2 = document.createElement("h2");
+  div2.textContent = datatitle;
+  //
+  iframeDiv.append(iframevideo);
+  container.append(iframeDiv, div2, div1);
+</script>
